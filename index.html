@@ -5,15 +5,19 @@
 <style>
 :root{--bg:#fcfcfb;--card:#fff;--ink:#0b0b0b;--ink2:#52514e;--ink3:#898781;
 --bd:rgba(11,11,11,.12);--bd2:rgba(11,11,11,.28);--acc:#0F6E56;--acc-bg:#E1F5EE;
---warn-bg:#FCEBEB;--warn:#A32D2D}
+--warn-bg:#FCEBEB;--warn:#A32D2D;--sunk:#f2f4f1;--acc-ink:#0a4638;--zebra:#f4f6f3;--hover:#e6efe9}
 @media(prefers-color-scheme:dark){:root{--bg:#1a1a19;--card:#232322;--ink:#f0efec;
 --ink2:#c3c2b7;--ink3:#898781;--bd:rgba(255,255,255,.14);--bd2:rgba(255,255,255,.3);
---acc:#5DCAA5;--acc-bg:#04342C;--warn-bg:#501313;--warn:#F09595}}
+--acc:#5DCAA5;--acc-bg:#0c3a2e;--acc-ink:#9fe1cb;--warn-bg:#501313;--warn:#F09595;--sunk:#222a25;--zebra:#1e2620;--hover:#27332c}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);
 font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
 .wrap{max-width:1080px;margin:0 auto;padding:2rem 1.25rem 4rem}
-h1{font-size:22px;font-weight:500;margin:0 0 .35rem}
+h1{font-size:1.9rem;font-weight:600;margin:0 0 .5rem;letter-spacing:-.01em}
+.eyebrow{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+color:var(--acc);font-weight:600}
+.lede{color:var(--ink2);font-size:.95rem;max-width:66ch;margin:.6rem 0 1.5rem}
+@media(max-width:640px){h1{font-size:1.5rem}}
 h2{font-size:16px;font-weight:500;margin:2rem 0 .5rem}
 p.sub{color:var(--ink2);margin:0 0 1.5rem;font-size:14px}
 select{font:inherit;padding:9px 12px;border:1px solid var(--bd2);border-radius:8px;
@@ -25,13 +29,30 @@ padding:1rem 1.25rem;margin:1rem 0}
 .kpi{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:.85rem 1rem}
 .kpi .l{font-size:12px;color:var(--ink2)}
 .kpi .v{font-size:23px;font-weight:500;margin-top:2px;font-variant-numeric:tabular-nums}
-table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
-td,th{padding:5px 11px;text-align:right}
-th{font-weight:500;color:var(--ink2)}
-td.n,th.n{text-align:left;color:var(--ink);white-space:nowrap}
-.mat td{border:1px solid var(--bd)}
-.mat td.d{background:var(--acc-bg);color:var(--acc)}
-.tot td,.tot th{color:var(--ink3);border:none;padding-top:7px}
+table{border-collapse:separate;border-spacing:0;font-size:.82rem;
+font-variant-numeric:tabular-nums;background:var(--card);
+border:1px solid var(--bd2);border-radius:10px;overflow:hidden}
+th,td{padding:.45rem .85rem;text-align:right;white-space:nowrap;
+border-bottom:1px solid var(--bd)}
+thead th{background:var(--sunk);color:var(--ink2);font-size:.72rem;font-weight:600;
+letter-spacing:.06em;text-transform:uppercase;border-bottom:2px solid var(--bd2)}
+tbody tr{background:var(--card)}
+tbody tr:nth-child(even){background:var(--zebra)}
+tbody tr:hover{background:var(--hover)}
+tbody th,tbody td.n{position:sticky;left:0;background:inherit;text-align:left;
+font-weight:500;color:var(--ink);border-right:1px solid var(--bd2)}
+thead th:first-child{position:sticky;left:0;background:var(--sunk);z-index:1;
+border-right:1px solid var(--bd2)}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:none}
+.mat td{border-right:1px solid var(--bd)}
+.mat td:last-child{border-right:none}
+.mat td.diag,.mat td.d{background:var(--acc-bg);color:var(--acc-ink);font-weight:600}
+tfoot td,tfoot th{background:var(--sunk);color:var(--ink2);font-size:.76rem;
+font-weight:600;border-top:2px solid var(--bd2);border-bottom:none}
+tfoot th{position:sticky;left:0;text-align:left;border-right:1px solid var(--bd2)}
+.tot td,.tot th{background:var(--sunk);color:var(--ink2);font-weight:600;
+border-top:2px solid var(--bd2)}
+.tot th.n,.tot td.n{background:var(--sunk)}
 .scroll{overflow-x:auto}
 .ano{color:var(--ink3);font-size:.75em}
 .ate{color:var(--ink3)}
@@ -42,10 +63,13 @@ td.n,th.n{text-align:left;color:var(--ink);white-space:nowrap}
 padding:2px 9px;font-size:12.5px;margin:2px 4px 2px 0}
 footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--bd);font-size:12.5px;color:var(--ink3)}
 </style></head><body><div class="wrap">
-<h1>Bahia — uma cadeia por cultura</h1>
-<p class="sub">Os vértices são as posições que a cultura escolhida ocupa na fila de receita bruta
-por hectare, mais um vértice <b>demais</b> que junta todas as outras posições. A contagem usa o
-movimento das 19 culturas com série completa de 31 anos, 1994 a 2024. Coluna = posição de origem.</p>
+<span class="eyebrow">Bahia · 1994–2024 · IBGE, tabela 1612</span>
+<h1>Uma cadeia por cultura</h1>
+<p class="lede">Em cada ano as 19 culturas com série ininterrupta de 31 anos são ordenadas
+pela receita bruta por hectare em reais de 2024. A posição de uma cultura é o lugar dela
+nessa fila. Escolhida uma cultura, os vértices da cadeia passam a ser as posições que ela
+ocupa, mais um vértice <strong>demais</strong> que junta todas as outras. A contagem usa o
+movimento das 19; a coluna é a posição de origem.</p>
 
 <label for="sel">Cultura</label>
 <select id="sel"></select>
@@ -83,50 +107,50 @@ function render(){
   ${d.grupo.filter(c=>c!==sel.value).join(', ')}. Elas ajudam a ler a tabela de ocupação,
   mas não mudam a matriz — a contagem usa as 19.</div></div>`;
 
-  h+=`<h2>Matriz de transição, contagem crua</h2><div class="scroll"><table class="mat"><tr><th></th>`;
-  R.forEach(r=>h+=`<th>de ${r}</th>`); h+='</tr>';
+  h+=`<h2>Matriz de transição, contagem crua</h2><div class="scroll"><table class="mat"><thead><tr><th></th>`;
+  R.forEach(r=>h+=`<th>de ${r}</th>`); h+='</tr></thead><tbody>';
   for(let i=0;i<n;i++){ h+=`<tr><th class="n">para ${R[i]}</th>`;
     for(let j=0;j<n;j++) h+=`<td class="${i===j?'d':''}">${d.contagem[i][j]}</td>`;
     h+='</tr>'; }
-  h+=`<tr class="tot"><th class="n">saídas</th>`;
-  d.saidas.forEach(s=>h+=`<td>${s}</td>`); h+='</tr></table></div>';
+  h+='</tbody><tfoot>'; h+=`<tr class="tot"><th class="n">saídas</th>`;
+  d.saidas.forEach(s=>h+=`<td>${s}</td>`); h+='</tr></tfoot></table></div>';
   h+=`<div class="nota">Cada vértice de posição própria tem 30 saídas, uma por par de anos.
   O vértice demais tem 30 vezes o número de posições que ele junta.</div>`;
 
-  h+=`<h2>Ocupação, em anos de 31</h2><div class="scroll"><table><tr><th class="n">cultura</th>`;
-  R.forEach(r=>h+=`<th>${r}</th>`); h+='</tr>';
+  h+=`<h2>Ocupação, em anos de 31</h2><div class="scroll"><table><thead><tr><th class="n">cultura</th>`;
+  R.forEach(r=>h+=`<th>${r}</th>`); h+='</tr></thead><tbody>';
   d.grupo.forEach(c=>{ h+=`<tr><td class="n">${c===sel.value?'<b>'+c+'</b>':c}</td>`;
     d.ocupacao[c].forEach(v=>h+=`<td>${v||''}</td>`); h+='</tr>'; });
   h+=`<tr><td class="n">as outras culturas</td>`;
   d.outras.forEach(v=>h+=`<td>${v||''}</td>`); h+='</tr>';
   const tot=R.map((_,k)=>d.grupo.reduce((s,c)=>s+d.ocupacao[c][k],0)+d.outras[k]);
-  h+=`<tr class="tot"><th class="n">total</th>`;
-  tot.forEach(v=>h+=`<td>${v}</td>`); h+='</tr></table></div>';
+  h+='</tbody><tfoot>'; h+=`<tr class="tot"><th class="n">total</th>`;
+  tot.forEach(v=>h+=`<td>${v}</td>`); h+='</tr></tfoot></table></div>';
   h+=`<div class="nota">Cada posição própria soma 31: uma ocupante por ano.
   O vértice demais soma 31 vezes o número de posições que ele junta.</div>`;
 
-  h+=`<h2>Ocupação, colunas normalizadas</h2><div class="scroll"><table><tr><th class="n">cultura</th>`;
-  R.forEach(r=>h+=`<th>${r}</th>`); h+='</tr>';
+  h+=`<h2>Ocupação, colunas normalizadas</h2><div class="scroll"><table><thead><tr><th class="n">cultura</th>`;
+  R.forEach(r=>h+=`<th>${r}</th>`); h+='</tr></thead><tbody>';
   d.grupo.forEach(c=>{ h+=`<tr><td class="n">${c===sel.value?'<b>'+c+'</b>':c}</td>`;
     d.ocupacao[c].forEach((v,k)=>h+=`<td>${v?f(v/tot[k]):''}</td>`); h+='</tr>'; });
   h+=`<tr><td class="n">as outras culturas</td>`;
   d.outras.forEach((v,k)=>h+=`<td>${v?f(v/tot[k]):''}</td>`); h+='</tr>';
-  h+=`<tr class="tot"><th class="n">soma</th>`;
-  tot.forEach(()=>h+=`<td>1,0000</td>`); h+='</tr></table></div>';
+  h+='</tbody><tfoot>'; h+=`<tr class="tot"><th class="n">soma</th>`;
+  tot.forEach(()=>h+=`<td>1,0000</td>`); h+='</tr></tfoot></table></div>';
   h+=`<div class="nota">Cada coluna dividida pelo próprio total, conforme a Eq. (1) de Moosavi
   e Isacchini. A célula responde: tomado um ano naquele vértice ao acaso, qual a probabilidade de
   o ocupante ser aquela cultura. Não é a matriz de transição — aqui a linha é a cultura e a
   coluna é o vértice, e a célula conta ocupação, não movimento.</div>`;
 
   const reais=v=>v==null?'—':v.toLocaleString('pt-BR',{maximumFractionDigits:0});
-  h+=`<h2>Receita média por hectare, em reais de 2024</h2><div class="scroll"><table><tr><th class="n">cultura</th>`;
-  R.forEach(r=>h+=`<th>${r}</th>`); h+='</tr>';
+  h+=`<h2>Receita média por hectare, em reais de 2024</h2><div class="scroll"><table><thead><tr><th class="n">cultura</th>`;
+  R.forEach(r=>h+=`<th>${r}</th>`); h+='</tr></thead><tbody>';
   d.grupo.forEach(c=>{ h+=`<tr><td class="n">${c===sel.value?'<b>'+c+'</b>':c}</td>`;
     d.receita[c].forEach(v=>h+=`<td>${reais(v)}</td>`); h+='</tr>'; });
   h+=`<tr><td class="n">as outras culturas</td>`;
   d.receita_outras.forEach(v=>h+=`<td>${reais(v)}</td>`); h+='</tr>';
-  h+=`<tr class="tot"><th class="n">média do vértice</th>`;
-  d.receita_vertice.forEach(v=>h+=`<td>${reais(v)}</td>`); h+='</tr></table></div>';
+  h+='</tbody><tfoot>'; h+=`<tr class="tot"><th class="n">média do vértice</th>`;
+  d.receita_vertice.forEach(v=>h+=`<td>${reais(v)}</td>`); h+='</tr></tfoot></table></div>';
   h+=`<div class="nota">A média da receita por hectare da cultura nos anos em que ela
   esteve naquele vértice. A ocupação diz quantos anos; esta diz com quanto dinheiro.
   O traço significa que a cultura nunca esteve ali. A posição é relativa às outras
@@ -139,12 +163,12 @@ function render(){
     if(v.n===1) return a;
     return `${a} <span class="ate">a</span> ${reais(v.max)} <span class="ano">(${v.ano_max})</span>`;
   };
-  h+=`<h2>Receita por hectare: o menor e o maior ano de cada vértice</h2><div class="scroll"><table><tr><th class="n">cultura</th>`;
-  R.forEach(r=>h+=`<th>${r}</th>`); h+='</tr>';
+  h+=`<h2>Receita por hectare: o menor e o maior ano de cada vértice</h2><div class="scroll"><table><thead><tr><th class="n">cultura</th>`;
+  R.forEach(r=>h+=`<th>${r}</th>`); h+='</tr></thead><tbody>';
   d.grupo.forEach(c=>{ h+=`<tr><td class="n">${c===sel.value?'<b>'+c+'</b>':c}</td>`;
     d.variacao[c].forEach(v=>h+=`<td>${faixa(v)}</td>`); h+='</tr>'; });
   h+=`<tr><td class="n">as outras culturas</td>`;
-  d.variacao_outras.forEach(v=>h+=`<td>${faixa(v)}</td>`); h+='</tr></table></div>';
+  d.variacao_outras.forEach(v=>h+=`<td>${faixa(v)}</td>`); h+='</tr></tbody></table></div>';
   h+=`<div class="nota">A mesma receita da tabela acima, agora nos extremos: o ano mais
   magro e o mais gordo em que aquela cultura esteve naquele vértice. Onde aparece um
   valor só, a cultura esteve ali num único ano. A distância entre os dois mostra o
@@ -153,10 +177,10 @@ function render(){
 
   h+=`<h2>Tempos, em anos</h2>`;
   d.tempos.forEach(t=>{
-    h+=`<div class="card"><b>Alvo: ${t.alvo} posição</b><div class="scroll"><table><tr><th class="n">partindo de</th>`;
-    R.forEach(r=>h+=`<th>${r}</th>`); h+='</tr>';
+    h+=`<div class="card"><b>Alvo: ${t.alvo} posição</b><div class="scroll"><table><thead><tr><th class="n">partindo de</th>`;
+    R.forEach(r=>h+=`<th>${r}</th>`); h+='</tr></thead><tbody>';
     h+=`<tr><td class="n">primeira passagem</td>`; t.passagem.forEach(v=>h+=`<td>${f(v,2)}</td>`); h+='</tr>';
-    h+=`<tr><td class="n">primeira chegada</td>`; t.chegada.forEach(v=>h+=`<td>${f(v,2)}</td>`); h+='</tr>';
+    h+=`<tr><td class="n">primeira chegada</td>`; t.chegada.forEach(v=>h+=`<td>${f(v,2)}</td>`); h+='</tr></tbody>';
     h+=`</table></div><div class="nota">As duas linhas só diferem na própria coluna do alvo:
     a chegada vale zero, porque já se está lá; a passagem vale o tempo de retorno.</div></div>`;});
 
